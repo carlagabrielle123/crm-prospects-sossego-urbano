@@ -10,47 +10,31 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <aside class="sidebar">
-      <a class="brand" href="#"><span class="brand-mark">SU</span><span>SOSSEGO<br />URBANO</span></a>
-      <nav>
-        <button class="nav-item active" data-view="dashboard"><span>▦</span> Visão geral</button>
-        <button class="nav-item" data-view="prospects"><span>◉</span> Prospects <b id="prospectTotal">0</b></button>
-        <button class="nav-item" data-filter="today"><span>◷</span> Ligar hoje <b id="todayNav">0</b></button>
-        <button class="nav-item" data-filter="overdue"><span>!</span> Atrasados <b id="overdueNav">0</b></button>
-      </nav>
-      <div class="sidebar-bottom"><span class="avatar">R</span><span><strong>Rafael</strong><small>Administrador</small></span></div>
-    </aside>
-
-    <main>
-      <header class="topbar">
-        <div><p class="eyebrow">CRM DE PROSPECTS</p><h1 id="pageTitle">Visão geral</h1></div>
-        <button class="primary" id="newProspect">+ Novo prospect</button>
-      </header>
-
-      <section id="dashboardView">
-        <div class="welcome"><div><p>Bom dia, Rafael.</p><h2>Seu comercial está sob controle.</h2><span>Veja as prioridades e mantenha cada oportunidade em movimento.</span></div><div class="date" id="todayDate"></div></div>
-        <div class="stats">
-          <article><span class="stat-icon navy">◎</span><div><p>Prospects ativos</p><strong id="activeCount">0</strong><small id="monthCount">0 novos neste mês</small></div></article>
-          <article><span class="stat-icon amber">◷</span><div><p>Contatos para hoje</p><strong id="todayCount">0</strong><small>merecem sua atenção</small></div></article>
-          <article><span class="stat-icon red">!</span><div><p>Follow-ups atrasados</p><strong id="overdueCount">0</strong><small>retome estes contatos</small></div></article>
-          <article><span class="stat-icon green">↗</span><div><p>Fechados</p><strong id="closedCount">0</strong><small>oportunidades concluídas</small></div></article>
-        </div>
-        <div class="dashboard-grid">
-          <section class="panel priority-panel"><div class="panel-head"><div><h3>Prioridades de hoje</h3><p>Contatos que precisam de retorno.</p></div><button class="text-btn" data-filter="today">Ver todos</button></div><div id="priorityList" class="contact-list"></div></section>
-          <section class="panel status-panel"><div class="panel-head"><div><h3>Pipeline</h3><p>Distribuição dos seus prospects.</p></div></div><div id="statusList" class="status-list"></div></section>
-        </div>
-      </section>
-
-      <section id="prospectsView" hidden>
-        <div class="list-toolbar"><div class="search"><span>⌕</span><input id="searchInput" placeholder="Buscar por nome ou telefone" /></div><select id="statusFilter"><option value="all">Todos os status</option><option value="Novo">Novos</option><option value="Em negociação">Em negociação</option><option value="Fechado">Fechados</option><option value="Perdido">Perdidos</option></select></div>
-        <div id="prospectList" class="prospect-list"></div>
-      </section>
-    </main>
-
-    <div class="modal-backdrop" id="modalBackdrop" hidden>
-      <div class="modal" id="prospectModal" hidden><button class="close" data-close>×</button><p class="eyebrow">NOVO CADASTRO</p><h2>Novo prospect</h2><form id="prospectForm"><label>Nome<input required name="name" placeholder="Nome completo" /></label><label>Telefone<input required name="phone" placeholder="(12) 99999-9999" /></label><label>Status<select name="status"><option>Novo</option><option>Em negociação</option><option>Fechado</option><option>Perdido</option></select></label><label>Próximo contato<input required name="nextContact" type="date" /></label><button class="primary full" type="submit">Cadastrar prospect</button></form></div>
-      <div class="modal detail-modal" id="detailModal" hidden><button class="close" data-close>×</button><div id="detailContent"></div></div>
+    <section class="login-screen" id="loginScreen">
+      <div class="login-card">
+        <img class="login-logo" src="logo-sossego-urbano.png" alt="Sossego Urbano Engenharia" />
+        <div class="login-copy"><p class="eyebrow">ÁREA RESTRITA</p><h1>CRM de prospects</h1><p>Acesse com seu e-mail e senha cadastrados pela Sossego Urbano.</p></div>
+        <form id="loginForm"><label>E-mail<input required name="email" type="email" placeholder="seuemail@exemplo.com" /></label><label>Senha<input required name="password" type="password" placeholder="Sua senha" /></label><p class="form-message" id="loginMessage" aria-live="polite"></p><button class="primary full" type="submit">Entrar no CRM</button></form>
+      </div>
+    </section>
+    <div id="appShell" hidden>
+      <aside class="sidebar">
+        <a class="brand" href="#"><span class="brand-mark">SU</span><span>SOSSEGO<br />URBANO</span></a>
+        <nav><button class="nav-item active" data-view="dashboard"><span>▦</span> Visão geral</button><button class="nav-item" data-view="prospects"><span>◉</span> Prospects <b id="prospectTotal">0</b></button><button class="nav-item" data-filter="today"><span>◷</span> Ligar hoje <b id="todayNav">0</b></button><button class="nav-item" data-filter="overdue"><span>!</span> Atrasados <b id="overdueNav">0</b></button></nav>
+        <div class="sidebar-bottom"><span class="avatar" id="userInitial">S</span><span><strong id="userName">Equipe</strong><small>Administrador</small></span><button class="signout" id="signOut" title="Sair">↪</button></div>
+      </aside>
+      <main>
+        <header class="topbar"><div><p class="eyebrow">CRM DE PROSPECTS</p><h1 id="pageTitle">Visão geral</h1></div><button class="primary" id="newProspect">+ Novo prospect</button></header>
+        <p class="app-message" id="appMessage" aria-live="polite"></p>
+        <section id="dashboardView">
+          <div class="welcome"><div><p id="welcomeName">Olá.</p><h2>Seu comercial está sob controle.</h2><span>Veja as prioridades e mantenha cada oportunidade em movimento.</span></div><div class="date" id="todayDate"></div></div>
+          <div class="stats"><article><span class="stat-icon navy">◎</span><div><p>Prospects ativos</p><strong id="activeCount">0</strong><small id="monthCount">0 novos neste mês</small></div></article><article><span class="stat-icon amber">◷</span><div><p>Contatos para hoje</p><strong id="todayCount">0</strong><small>merecem sua atenção</small></div></article><article><span class="stat-icon red">!</span><div><p>Follow-ups atrasados</p><strong id="overdueCount">0</strong><small>retome estes contatos</small></div></article><article><span class="stat-icon green">↗</span><div><p>Fechados</p><strong id="closedCount">0</strong><small>oportunidades concluídas</small></div></article></div>
+          <div class="dashboard-grid"><section class="panel priority-panel"><div class="panel-head"><div><h3>Prioridades de hoje</h3><p>Contatos que precisam de retorno.</p></div><button class="text-btn" data-filter="today">Ver todos</button></div><div id="priorityList" class="contact-list"></div></section><section class="panel status-panel"><div class="panel-head"><div><h3>Pipeline</h3><p>Distribuição dos seus prospects.</p></div></div><div id="statusList" class="status-list"></div></section></div>
+        </section>
+        <section id="prospectsView" hidden><div class="list-toolbar"><div class="search"><span>⌕</span><input id="searchInput" placeholder="Buscar por nome ou telefone" /></div><select id="statusFilter"><option value="all">Todos os status</option><option value="Novo">Novos</option><option value="Em negociação">Em negociação</option><option value="Fechado">Fechados</option><option value="Perdido">Perdidos</option></select></div><div id="prospectList" class="prospect-list"></div></section>
+      </main>
+      <div class="modal-backdrop" id="modalBackdrop" hidden><div class="modal" id="prospectModal" hidden><button class="close" data-close>×</button><p class="eyebrow">NOVO CADASTRO</p><h2>Novo prospect</h2><form id="prospectForm"><label>Nome<input required name="name" placeholder="Nome completo" /></label><label>Telefone<input required name="phone" placeholder="(12) 99999-9999" /></label><label>Status<select name="status"><option>Novo</option><option>Em negociação</option><option>Fechado</option><option>Perdido</option></select></label><label>Próximo contato<input required name="nextContact" type="date" /></label><button class="primary full" type="submit">Cadastrar prospect</button></form></div><div class="modal detail-modal" id="detailModal" hidden><button class="close" data-close>×</button><div id="detailContent"></div></div></div>
     </div>
-    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="app.js"></script>
   </body>
 </html>
